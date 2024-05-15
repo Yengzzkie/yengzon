@@ -18,16 +18,11 @@ export default function Root() {
   
     fetchData();
   }, [])
-
-  console.log(data)
-
   
   return (
     <>
       <Navigation />
-      <Outlet context={[data, setData]} />
+      <Outlet context={{data, setData}} />
     </>
   );
 }
-
-
