@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation";
 
+export const DataContext = createContext();
+export const CartContext = createContext();
+
 export default function Root() {
   const [data, setData] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,8 +25,12 @@ export default function Root() {
   
   return (
     <>
-      <Navigation />
-      <Outlet context={{data, setData}} />
+    <DataContext.Provider value={{ data }}>
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Navigation />
+        <Outlet />
+      </CartContext.Provider>
+    </DataContext.Provider>
     </>
   );
 }

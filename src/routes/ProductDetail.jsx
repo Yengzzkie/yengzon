@@ -1,31 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { DataContext } from "./Root";
 
 export default function ProductDetail() {
   const { prodID } = useParams();
-  const [currentProduct, setCurrentProduct] = useState([])
+  const data = useContext(DataContext)
+  const products = data.data
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(`https://fakestoreapi.com/products/${prodID}`);
-        const data = await response.json();
-        setCurrentProduct(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  
-    fetchData();
-  }, [prodID])
+  const viewingProduct = products.find(product => product.id == prodID)
 
   return (
     <>
-      <h1>Product Details</h1>
-      <p>{currentProduct.title}</p>
-      <img src={currentProduct.image} alt={currentProduct.title} />
-      <p>${currentProduct.price}</p>
-      <p>Description: {currentProduct.description}</p>
+      <h1>{viewingProduct.title}</h1>
+      <img src={viewingProduct.image} alt={viewingProduct.title} />
+      <p>${viewingProduct.price}</p>
     </>
   );
 }

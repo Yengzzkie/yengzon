@@ -10,7 +10,7 @@ export default function Home() {
       </div>
 
       <div className="image-wrapper">
-        <img src={HeroImage} alt="hero-image" />
+        <img src={HeroImage} className="logo" alt="hero-image" />
       </div>
     </div>
   );
