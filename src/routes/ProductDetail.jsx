@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext } from "./Root";
 
@@ -14,6 +14,8 @@ export default function ProductDetail() {
       <h1>{viewingProduct.title}</h1>
       <img src={viewingProduct.image} alt={viewingProduct.title} />
       <p>${viewingProduct.price}</p>
+      <p>{viewingProduct.description}</p>
+      <Link to={"/products/"}><button>Continue Shopping</button></Link>
     </>
   );
 }

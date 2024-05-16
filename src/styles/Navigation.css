@@ -27,9 +27,11 @@ img {
 .cart-items {
     position: relative;
     margin-right: 2rem;
+    cursor: pointer;
 
     .cart-icon {
         font-size: 1.5em;
+        color: var(--default-font-color);
     }
 
     span {

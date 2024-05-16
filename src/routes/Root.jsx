@@ -4,6 +4,7 @@ import Navigation from "../components/Navigation";
 
 export const DataContext = createContext();
 export const CartContext = createContext();
+export const AddToCartContext = createContext();
 
 export default function Root() {
   const [data, setData] = useState([]);
@@ -22,13 +23,21 @@ export default function Root() {
   
     fetchData();
   }, [])
+
+  function handleAddToCart(product) {
+    const updatedCart = [...cart, product];
+    setCart(updatedCart);
+    console.log(cart);
+  }
   
   return (
     <>
     <DataContext.Provider value={{ data }}>
       <CartContext.Provider value={{ cart, setCart }}>
-        <Navigation />
-        <Outlet />
+        <AddToCartContext.Provider value={{ handleAddToCart }}>
+          <Navigation />
+          <Outlet />
+        </AddToCartContext.Provider>
       </CartContext.Provider>
     </DataContext.Provider>
     </>

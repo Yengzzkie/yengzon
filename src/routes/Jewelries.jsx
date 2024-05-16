@@ -3,17 +3,19 @@ import { useContext } from "react";
 import { DataContext, AddToCartContext } from "./Root";
 import "../styles/ProductPage.css";
 
-export default function ProductPage() {
+export default function Jewelries() {
   const data = useContext(DataContext);
   const { handleAddToCart } = useContext(AddToCartContext);
   const products = data.data;
   console.log(data);
 
+  const filteredItems = products.filter(item => item.category === "jewelery")
+
   return (
     <div className="product-page-wrapper">
       <h1>Products Page</h1>
       <div className="product-page">
-        {products.map((product) => (
+        {filteredItems.map((product) => (
           <li key={product.id}>
             <div className="product-list">
               <img

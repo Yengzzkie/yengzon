@@ -1,0 +1,4 @@
+.cart-display-wrapper  {
+    display: flex;
+    flex-direction: column;
+}
