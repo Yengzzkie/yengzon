@@ -7,6 +7,7 @@ export const CartContext = createContext();
 export const AddToCartContext = createContext();
 
 export default function Root() {
+  const [navIsActive, setNavIsActive] = useState(false)
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -15,7 +16,9 @@ export default function Root() {
       try {
         const response = await fetch("https://fakestoreapi.com/products");
         const data = await response.json();
-        setData(data)
+        //initialize quantity prop for quantity modification for cart
+        const quantifiedData = data.map(item => ({...item, quantity: 1}))
+        setData(quantifiedData)
       } catch (error) {
         console.error(error);
       }
@@ -25,17 +28,34 @@ export default function Root() {
   }, [])
 
   function handleAddToCart(product) {
-    const updatedCart = [...cart, product];
-    setCart(updatedCart);
-    console.log(cart);
+    let itemsInCart;
+
+    const duplicate = cart.some(item => item.id === product.id);
+
+    if (duplicate) {
+      // If the product is already in the cart, increase its quantity
+      itemsInCart = cart.map(item => 
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+    } else {
+      // If the product is not in the cart, add it with a quantity of 1
+      itemsInCart = [...cart, { ...product, quantity: 1 }];
+    }
+
+    setCart(itemsInCart);
+    console.log(itemsInCart);
+  }
+
+  function toggleNav() {
+    setNavIsActive(prevState => !prevState);
   }
   
   return (
     <>
     <DataContext.Provider value={{ data }}>
-      <CartContext.Provider value={{ cart, setCart }}>
+      <CartContext.Provider value={{ cart, setCart, navIsActive, toggleNav }}>
         <AddToCartContext.Provider value={{ handleAddToCart }}>
-          <Navigation />
+          <Navigation navIsActive={navIsActive} toggleNav={toggleNav} />
           <Outlet />
         </AddToCartContext.Provider>
       </CartContext.Provider>

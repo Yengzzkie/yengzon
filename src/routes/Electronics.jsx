@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DataContext, AddToCartContext } from "./Root";
+import ItemCard from "../components/ItemCard";
 import "../styles/ProductPage.css";
 
 export default function Electronics() {
@@ -13,23 +13,10 @@ export default function Electronics() {
 
   return (
     <div className="product-page-wrapper">
-      <h1>Products Page</h1>
+      <h1>Electronics</h1>
       <div className="product-page">
         {filteredItems.map((product) => (
-          <li key={product.id}>
-            <div className="product-list">
-              <img
-                src={product.image}
-                className="product-image"
-                alt={product.title}
-              />
-              <Link to={`/products/${product.id}`}>
-                <p>{product.title}</p>
-              </Link>
-              <span>${product.price}</span>
-              <button className="add-to-cart-btn" onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            </div>
-          </li>
+          <ItemCard key={product.id} product={product} handleAddToCart={handleAddToCart}/>
         ))}
       </div>
     </div>

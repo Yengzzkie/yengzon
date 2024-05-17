@@ -7,7 +7,7 @@ export default function Cart() {
   const cartItems = cart.cart;
   console.log(cartItems);
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <div>
@@ -16,11 +16,12 @@ export default function Cart() {
           <li key={item.id}>
             <img src={item.image} alt={item.title} />
             <p>{item.title}</p>
-            <span>${item.price}</span>
+            <span>${item.price}</span> X
+            <span>{item.quantity}</span>
           </li>
         ))}
       </ul>
-      <span>Total: ${totalPrice}</span>
+      <span>Total: ${totalPrice.toFixed(2)}</span>
     </div>
   );
 }

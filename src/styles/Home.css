@@ -31,3 +31,12 @@
         }
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .cart-items-mobile {
+        display: block;
+        position: fixed;
+        right: 5%;
+        font-size: 1.5rem;
+    }
+}
