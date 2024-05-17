@@ -13,23 +13,27 @@ export default function ItemCard({ product, handleAddToCart }) {
   };
 
   return (
-    <li key={product.id} className={added ? 'added' : ''}>
+    <li key={product.id}>
       <div className={`product-list ${added ? 'added' : ''}`}>
-        <img
-          src={product.image}
-          className="product-image"
-          alt={product.title}
-        />
-        <Link to={`/products/${product.id}`}>
-          <p>{product.title}</p>
-        </Link>
-        <span>${product.price}</span>
-        <button
-          className={`add-to-cart-btn ${added ? 'added' : ''}`}
-          onClick={handleClick}
-        >
-          {added ? `Added to Cart ✔` : 'Add to Cart'}
-        </button>
+        <div className="item-image-wrapper">
+            <img
+              src={product.image}
+              className="product-image"
+              alt={product.title}
+            />
+        </div>
+        <div className="item-description-wrapper">
+            <Link to={`/products/${product.id}`}>
+              <p>{product.title}</p>
+            </Link>
+            <span>${product.price}</span>
+            <button
+              className={`add-to-cart-btn ${added ? 'added' : ''}`}
+              onClick={handleClick}
+            >
+              {added ? `Added to Cart ✔` : 'Add to Cart'}
+            </button>
+        </div>
       </div>
     </li>
   );

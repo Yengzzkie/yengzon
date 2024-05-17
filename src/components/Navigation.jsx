@@ -17,7 +17,7 @@ export default function Navigation() {
       <button className="hamburger" onClick={toggleNav}>
         <FontAwesomeIcon icon={faBars} />
       </button>
-          <Link to='/'><img src={logo} alt={logo} /></Link>
+          <Link to='/'><img src={logo} className="nav-logo" alt={logo} /></Link>
           <ul>
               <li><Link to={'/'}>Home</Link></li>
               <li><Link to={'/products/mens'}>Men&apos;s Clothing</Link></li>
