@@ -2,3 +2,23 @@
     display: flex;
     flex-direction: column;
 }
+
+.computation, .price {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        color: #606060;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .cart-wrapper {
+        flex-direction: column;
+    }
+
+    li {
+        margin-right: none;
+    }
+}

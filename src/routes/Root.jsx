@@ -7,7 +7,7 @@ export const CartContext = createContext();
 export const AddToCartContext = createContext();
 
 export default function Root() {
-  const [navIsActive, setNavIsActive] = useState(false)
+
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -46,16 +46,14 @@ export default function Root() {
     console.log(itemsInCart);
   }
 
-  function toggleNav() {
-    setNavIsActive(prevState => !prevState);
-  }
+
   
   return (
     <>
     <DataContext.Provider value={{ data }}>
-      <CartContext.Provider value={{ cart, setCart, navIsActive, toggleNav }}>
+      <CartContext.Provider value={{ cart, setCart }}>
         <AddToCartContext.Provider value={{ handleAddToCart }}>
-          <Navigation navIsActive={navIsActive} toggleNav={toggleNav} />
+          <Navigation />
           <Outlet />
         </AddToCartContext.Provider>
       </CartContext.Provider>
